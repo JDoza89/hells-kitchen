@@ -4,13 +4,15 @@ Next.js 15 (App Router) + Storyblok integration for the **Blok Clad** luxury coo
 
 ## HTTPS preview URL (Storyblok Visual Editor)
 
-After deployment, set your Storyblok space **Location (preview)** to:
+**Current preview (Vercel):**
 
-```
-https://YOUR_PREVIEW_HOST/en/blok-clad
-```
+### https://temporary-fast-bugle-szpw24p.vercel.app/en/blok-clad
 
-Use the deployed preview URL from the latest Vercel deployment (see **Deployments** in this repo or the agent report). Locales:
+Set Storyblok **Settings → Visual Editor → Location** to that URL (HTTPS required). Root `/` redirects to `/en/blok-clad`.
+
+This deployment is an unclaimed Vercel temporary preview (~1 hour TTL). To keep a permanent URL, import the repo in [Vercel](https://vercel.com) and set env vars from `.env.example`, or claim via the link printed by `npx vercel deploy --temporary`.
+
+Locales:
 
 | Locale | Path |
 |--------|------|
@@ -21,7 +23,7 @@ Use the deployed preview URL from the latest Vercel deployment (see **Deployment
 For draft / Visual Editor preview with Next.js draft mode:
 
 ```
-https://YOUR_PREVIEW_HOST/api/draft?secret=YOUR_STORYBLOK_PREVIEW_SECRET&locale=en&slug=blok-clad
+https://temporary-fast-bugle-szpw24p.vercel.app/api/draft?secret=YOUR_STORYBLOK_PREVIEW_SECRET&locale=en&slug=blok-clad
 ```
 
 Configure the preview URL in Storyblok: **Settings → Visual Editor → Location**. Use the HTTPS deployment URL above (not `localhost`).
