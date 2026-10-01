@@ -1,4 +1,3 @@
-import { storyblokInit } from "@storyblok/react/rsc";
 import LandingPage from "@/components/storyblok/LandingPage";
 import Hero from "@/components/storyblok/Hero";
 import ProofStrip from "@/components/storyblok/ProofStrip";
@@ -10,6 +9,7 @@ import BenefitItem from "@/components/storyblok/BenefitItem";
 import InTheBox from "@/components/storyblok/InTheBox";
 import BoxItem from "@/components/storyblok/BoxItem";
 import Finishes from "@/components/storyblok/Finishes";
+import FinishItem from "@/components/storyblok/FinishItem";
 import Reviews from "@/components/storyblok/Reviews";
 import ReviewItem from "@/components/storyblok/ReviewItem";
 import Specs from "@/components/storyblok/Specs";
@@ -17,6 +17,7 @@ import SpecRow from "@/components/storyblok/SpecRow";
 import WaitlistSection from "@/components/storyblok/WaitlistSection";
 import Seo from "@/components/storyblok/Seo";
 
+/** Shared Storyblok component registry — no storyblokInit; safe for client and server. */
 export const storyblokComponents = {
   landing_page: LandingPage,
   hero: Hero,
@@ -29,6 +30,7 @@ export const storyblokComponents = {
   in_the_box: InTheBox,
   box_item: BoxItem,
   finishes: Finishes,
+  finish_item: FinishItem,
   review_item: ReviewItem,
   reviews: Reviews,
   specs: Specs,
@@ -36,14 +38,3 @@ export const storyblokComponents = {
   waitlist: WaitlistSection,
   seo: Seo,
 };
-
-export function initStoryblok() {
-  storyblokInit({
-    accessToken: process.env.STORYBLOK_ACCESS_TOKEN ?? "",
-    use: [],
-    components: storyblokComponents,
-    enableFallbackComponent: true,
-  });
-}
-
-initStoryblok();

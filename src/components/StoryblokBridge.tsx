@@ -2,12 +2,13 @@
 
 import { useEffect } from "react";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
-import { storyblokComponents } from "@/lib/storyblok-components";
+import { storyblokComponents } from "@/lib/storyblok-components-map";
 
 storyblokInit({
   accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN ?? "",
   use: [apiPlugin],
   components: storyblokComponents,
+  enableFallbackComponent: true,
 });
 
 export function StoryblokBridge() {
