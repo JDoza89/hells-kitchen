@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { draftMode } from "next/headers";
 import { StoryblokStory } from "@storyblok/react/rsc";
-import "@/lib/storyblok-components";
+import "@/lib/storyblok-rsc-init";
 import { fetchBlokCladStory } from "@/lib/storyblok";
 import { seoFromLandingPage } from "@/lib/storyblok/seo";
 import { isValidLocale, type Locale } from "@/lib/i18n";
