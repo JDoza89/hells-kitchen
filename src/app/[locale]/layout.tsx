@@ -4,11 +4,6 @@ import { isValidLocale, type Locale } from "@/lib/i18n";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { StoryblokBridge } from "@/components/StoryblokBridge";
 
-export const metadata: Metadata = {
-  title: "Blok Clad",
-  description: "Luxury cookware — quiet heat.",
-};
-
 export default async function LocaleLayout({
   children,
   params,

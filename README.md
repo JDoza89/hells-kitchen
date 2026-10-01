@@ -1,80 +1,48 @@
-# Blok Clad — Storyblok product landing
+# Blok Clad — Storyblok landing page
 
-Next.js 15 (App Router) + Storyblok integration for the **Blok Clad** luxury cookware PLP (`blok-clad` story, space `576483045338294`, US API region).
+Next.js 15 (App Router) + Storyblok for the **`blok-clad`** story (`landing_page` content type), space `576483045338294` (US CDN).
 
-## HTTPS preview URL (Storyblok Visual Editor)
+## HTTPS preview (Storyblok Visual Editor)
 
-**Current preview (Vercel):**
+**Production:** https://hells-kitchen-silk.vercel.app/en/blok-clad
 
-### https://temporary-fast-bugle-szpw24p.vercel.app/en/blok-clad
+Set **Settings → Visual Editor → Location** to:
 
-Set Storyblok **Settings → Visual Editor → Location** to that URL (HTTPS required). Root `/` redirects to `/en/blok-clad`.
+| Locale | URL |
+|--------|-----|
+| English | `https://hells-kitchen-silk.vercel.app/en/blok-clad` |
+| Spanish | `https://hells-kitchen-silk.vercel.app/es/blok-clad` |
+| Japanese | `https://hells-kitchen-silk.vercel.app/ja/blok-clad` |
 
-This deployment is an unclaimed Vercel temporary preview (~1 hour TTL). To keep a permanent URL, import the repo in [Vercel](https://vercel.com) and set env vars from `.env.example`, or claim via the link printed by `npx vercel deploy --temporary`.
-
-Locales:
-
-| Locale | Path |
-|--------|------|
-| English (default) | `/en/blok-clad` |
-| Spanish | `/es/blok-clad` |
-| Japanese | `/ja/blok-clad` |
-
-For draft / Visual Editor preview with Next.js draft mode:
+Draft / Visual Editor entry (set `STORYBLOK_PREVIEW_SECRET` on Vercel):
 
 ```
-https://temporary-fast-bugle-szpw24p.vercel.app/api/draft?secret=YOUR_STORYBLOK_PREVIEW_SECRET&locale=en&slug=blok-clad
+https://hells-kitchen-silk.vercel.app/api/draft?secret=YOUR_SECRET&locale=en&slug=blok-clad
 ```
 
-Configure the preview URL in Storyblok: **Settings → Visual Editor → Location**. Use the HTTPS deployment URL above (not `localhost`).
-
-## Quick start
+## Local setup
 
 ```bash
 cp .env.example .env.local
+# Add STORYBLOK_ACCESS_TOKEN + NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN from Storyblok (US space)
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (redirects to `/en/blok-clad`).
+`STORYBLOK_ACCESS_TOKEN` is **required** — content is loaded only from Storyblok (no mock fallback).
 
-## Environment variables
+## Storyblok components
 
-| Variable | Description |
-|----------|-------------|
-| `STORYBLOK_ACCESS_TOKEN` | Preview or public token for CDN API (US region) |
-| `NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN` | Same token for Storyblok bridge in the browser |
-| `STORYBLOK_REGION` | `us` (default) |
-| `STORYBLOK_SPACE_ID` | `576483045338294` |
-| `STORYBLOK_PREVIEW` | `true` to prefer draft content when not in draft mode |
-| `STORYBLOK_PREVIEW_SECRET` | Secret for `/api/draft` entry |
+| Blok | React component |
+|------|-----------------|
+| `landing_page` | `LandingPage` (+ sticky teaser from page fields) |
+| `hero`, `proof_strip`, `material_story`, `benefits`, `in_the_box`, `finishes`, `reviews`, `specs`, `waitlist` | same name (PascalCase file) |
+| `quote_chip`, `benefit_item`, `box_item`, `finish_item`, `review_item`, `spec_row`, `layer_label`, `seo` | nested items |
 
-Without `STORYBLOK_ACCESS_TOKEN`, the app renders a **mock** `blok-clad` story with the same blok component names and localized copy for `en`, `es`, and `ja`. Add a preview token from Storyblok (**Settings → Access tokens**) to load the live published story.
+Fetches use `language=en|es|ja`. Spec rows use `value_imperial` for `en`, `value_metric` for `es` and `ja`.
 
-## Storyblok blok mapping
+## Waitlist
 
-React components under `src/components/storyblok/` map 1:1 to:
+`POST /api/waitlist` — `{ "email": "you@example.com" }`
 
-- `product_landing` → `ProductLanding`
-- `plp_hero`, `plp_proof_strip`, `plp_material_story`, `plp_benefits`, `plp_inbox`, `plp_finishes`, `plp_reviews`, `plp_specs`, `plp_waitlist`, `plp_seo`
-- Nested: `plp_sticky_teaser`, `plp_footer`, `plp_quote_chip`, `plp_benefit_item`, `plp_finish_item`, `plp_review_item`, `plp_spec_row`, `plp_layer_label`
-
-## Waitlist API
-
-`POST /api/waitlist` with JSON:
-
-```json
-{ "email": "you@example.com", "finish": "brushed_steel" }
-```
-
-Default finish: `brushed_steel`. Entries are stored in-memory on the server instance (suitable for preview; use a database in production).
-
-## Design — “Quiet heat”
-
-- Background: `#F7F4F0` (warm plaster)
-- Ink + copper accent (`src/lib/design.ts`, Tailwind theme in `globals.css`)
-- Sticky teaser (`plp_sticky_teaser`) is hidden before **2026-10-01** UTC
-
-## Locales
-
-Middleware redirects `/` → `/en/blok-clad`. The header switcher links between `en`, `es`, and `ja`. Story fetches pass `language` to Storyblok when a token is configured.
+Hero and sticky teaser CTAs link to `#waitlist` (or `anchor_id` from the waitlist blok).

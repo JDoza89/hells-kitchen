@@ -23,7 +23,7 @@ export function LocaleSwitcher({ currentLocale }: Props) {
 
   return (
     <nav
-      className="flex items-center gap-3 text-sm tracking-wide text-ink-muted"
+      className="flex items-center gap-3 text-sm tracking-wide text-ink/60"
       aria-label="Language"
     >
       {locales.map((locale) => (

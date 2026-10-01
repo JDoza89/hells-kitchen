@@ -1,15 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
 @theme inline {
   --color-plaster: #f7f4f0;
-  --color-ink: #2a2826;
-  --color-ink-muted: #5c5854;
+  --color-ink: #1c1b1a;
+  --color-stone: #e8e3dc;
   --color-copper: #b87333;
-  --color-copper-light: #d4a574;
-  --color-steel: #8a9199;
-  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --color-star-gold: #c4a35a;
+  --font-serif: "Fraunces", "Georgia", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 html {
